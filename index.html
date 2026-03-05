@@ -216,13 +216,189 @@
   .footer-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.8); letter-spacing: 0.06em; text-transform: uppercase; }
   .footer-right { font-size: 12px; font-weight: 300; text-align: right; line-height: 1.7; }
 
+  /* ── EXECUTIVE SUMMARY ── */
+  .exec-summary { background: var(--white); border: 1px solid var(--grey-faint); border-top: 3px solid var(--wine); padding: 36px 40px; margin-top: 48px; margin-bottom: 8px; }
+  .exec-summary-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+  .exec-summary-label { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--wine); }
+  .exec-summary-headline { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 400; color: var(--black); line-height: 1.35; margin-bottom: 16px; }
+  .exec-summary-body { font-size: 14px; font-weight: 300; color: var(--grey-dark); line-height: 1.75; }
+  .exec-summary-body p + p { margin-top: 10px; }
+  .exec-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--grey-faint); }
+  .exec-kpi { text-align: center; }
+  .exec-kpi-value { font-family: "Playfair Display", serif; font-size: 24px; color: var(--wine); margin-bottom: 4px; }
+  .exec-kpi-label { font-size: 10.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey-mid); }
+
+  /* ── ARCHITECTURE & STACK ── */
+  .arch-overview { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 0; }
+  .arch-card { background: var(--white); border: 1px solid var(--grey-faint); padding: 28px 32px; }
+  .arch-card-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wine); margin-bottom: 12px; }
+  .arch-card-title { font-family: "Playfair Display", serif; font-size: 18px; font-weight: 400; color: var(--black); margin-bottom: 12px; }
+  .arch-card-body { font-size: 13px; font-weight: 300; color: var(--grey-dark); line-height: 1.7; }
+  .arch-card-body p + p { margin-top: 8px; }
+  .arch-flow { background: var(--white); border: 1px solid var(--grey-faint); border-top: 3px solid var(--wine); padding: 32px; margin-top: 20px; }
+  .arch-flow-title { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wine); margin-bottom: 20px; }
+  .arch-flow-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; align-items: stretch; }
+  .arch-flow-step { text-align: center; padding: 16px 12px; position: relative; }
+  .arch-flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--grey-light); z-index: 1; }
+  .arch-step-icon { width: 44px; height: 44px; background: var(--wine); color: white; font-family: "Playfair Display", serif; font-size: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
+  .arch-step-name { font-size: 11.5px; font-weight: 500; color: var(--black); margin-bottom: 4px; }
+  .arch-step-desc { font-size: 11px; font-weight: 300; color: var(--grey-mid); line-height: 1.45; }
+  .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 0; }
+  .stack-card { background: var(--white); border: 1px solid var(--grey-faint); padding: 22px 24px; }
+  .stack-card-label { font-size: 9.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--wine); margin-bottom: 10px; }
+  .stack-item { padding: 6px 0; border-bottom: 1px solid var(--grey-faint); display: flex; justify-content: space-between; align-items: baseline; }
+  .stack-item:last-child { border-bottom: none; }
+  .stack-item-name { font-size: 13px; font-weight: 500; color: var(--black); }
+  .stack-item-desc { font-size: 11.5px; font-weight: 300; color: var(--grey-mid); text-align: right; max-width: 55%; }
+  .arch-principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
+  .arch-principle { background: var(--grey-faint); padding: 18px 20px; text-align: center; }
+  .arch-principle-icon { font-size: 20px; margin-bottom: 8px; }
+  .arch-principle-name { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); margin-bottom: 4px; }
+  .arch-principle-desc { font-size: 11.5px; font-weight: 300; color: var(--grey-mid); line-height: 1.5; }
+
+  /* ── RISKS & MITIGATIONS ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 0; }
+  .risk-row { display: grid; grid-template-columns: 2fr 3fr; gap: 0; border: 1px solid var(--grey-faint); border-top: none; }
+  .risk-row:first-child { border-top: 1px solid var(--grey-faint); }
+  .risk-cell { padding: 20px 24px; background: var(--white); }
+  .risk-cell-mit { padding: 20px 24px; background: var(--cream); border-left: 1px solid var(--grey-faint); }
+  .risk-severity { display: inline-block; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 7px; border-radius: 2px; margin-bottom: 8px; }
+  .severity-high { background: #fde8e8; color: #a02a2a; }
+  .severity-medium { background: #fdf3e7; color: #a0622a; }
+  .severity-low { background: #e8f0fb; color: #2a55a0; }
+  .risk-name { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; }
+  .risk-desc { font-size: 12.5px; font-weight: 300; color: var(--grey-dark); line-height: 1.6; }
+  .mit-label { font-size: 9.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--wine); margin-bottom: 8px; }
+  .mit-text { font-size: 12.5px; font-weight: 300; color: var(--grey-dark); line-height: 1.65; }
+  .risk-header-row { display: grid; grid-template-columns: 2fr 3fr; gap: 0; border: 1px solid var(--grey-light); background: var(--grey-faint); }
+  .risk-header-cell { padding: 10px 24px; font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey-mid); }
+  .risk-header-cell:last-child { border-left: 1px solid var(--grey-light); }
+
   @media (max-width: 768px) {
-    header, .page, footer, .confidential-strip, .tab-bar { padding-left: 20px; padding-right: 20px; }
-    .intro-block, .biz-model-grid, .two-col, .funds-grid, .team-grid, .hiring-grid { grid-template-columns: 1fr; }
-    .intro-stats { border-left: none; padding-left: 0; border-top: 1px solid var(--grey-faint); padding-top: 24px; }
-    .doc-row { grid-template-columns: 24px 1fr 80px; }
+    /* Global spacing */
+    header, .page, footer, .confidential-strip { padding-left: 16px; padding-right: 16px; }
+    .disclaimer-banner { padding: 10px 16px; font-size: 10.5px; }
+    .page { padding-bottom: 48px; }
+
+    /* Header */
+    header { flex-direction: column; padding: 24px 16px 20px; gap: 16px; }
+    .header-right { text-align: left; padding-top: 0; min-width: unset; }
+    .header-title { font-size: 22px; }
+    .logo-sub { margin-left: 50px; }
+    .header-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+
+    /* Confidential strip */
+    .confidential-strip { flex-direction: column; gap: 4px; padding: 10px 16px; }
+
+    /* Tabs — horizontal scroll */
+    .tab-bar { padding: 0 0 0 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .tab-bar::-webkit-scrollbar { display: none; }
+    .tab-btn { padding: 14px 16px; font-size: 11px; flex-shrink: 0; }
+
+    /* Section titles */
+    .section-title { margin-top: 36px; }
+
+    /* Intro block */
+    .intro-block { grid-template-columns: 1fr; gap: 24px; margin-top: 28px; padding-bottom: 28px; }
+    .intro-headline { font-size: 18px; }
+    .intro-stats { border-left: none; padding-left: 0; border-top: 1px solid var(--grey-faint); padding-top: 20px; }
+
+    /* Module pills */
+    .modules-row { flex-direction: column; gap: 10px; margin-top: 20px; }
+    .module-pill { min-width: unset; }
+
+    /* Business model */
+    .biz-model-grid { grid-template-columns: 1fr; gap: 16px; }
+    .biz-card { padding: 20px; }
+    .biz-card-price { font-size: 22px; }
+
+    /* Pipeline */
+    .pipeline-grid { grid-template-columns: 1fr; gap: 10px; }
+    .pipeline-card { padding: 14px 16px; }
+    .pipeline-legend { flex-direction: column; gap: 10px; }
+
+    /* ARR table — horizontal scroll */
+    .arr-breakdown { padding: 16px; overflow-x: auto; }
+    .arr-header { flex-direction: column; gap: 4px; }
+    .arr-total-value { font-size: 22px; }
+    .arr-table { min-width: 580px; }
+
+    /* ACV grid */
+    .acv-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+
+    /* Doc index */
+    .doc-row { grid-template-columns: 24px 1fr auto; gap: 10px; padding: 12px 0; }
     .doc-type { display: none; }
-    .ownership-block { grid-template-columns: 1fr 1fr; }
+    .doc-name { font-size: 13.5px; }
+    .doc-desc { font-size: 11.5px; }
+    .doc-row:hover { margin: 0; padding: 12px 0; }
+    .dl-btn { padding: 5px 10px; font-size: 10.5px; }
+
+    /* Deck block */
+    .deck-block { padding: 20px !important; }
+
+    /* Legal */
+    .legal-block { padding: 20px; margin-top: 36px; }
+
+    /* Mission / Vision */
+    .two-col { grid-template-columns: 1fr; gap: 16px; }
+    .mvv-card { padding: 20px; }
+    .mvv-text { font-size: 15px; }
+
+    /* Roadmap table — horizontal scroll */
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -16px; padding: 0 16px; }
+    .table-scroll .roadmap-table { min-width: 700px; }
+    .table-scroll .proj-table { min-width: 560px; }
+
+    /* Use of funds */
+    .funds-grid { grid-template-columns: 1fr; gap: 16px; }
+    .funds-card { padding: 20px; }
+    .funds-total { font-size: 24px; }
+
+    /* Team */
+    .team-grid { grid-template-columns: 1fr; gap: 16px; }
+    .team-card { padding: 20px; }
+    .team-card-header { gap: 14px; }
+    .team-avatar { width: 48px; height: 48px; font-size: 20px; }
+    .team-name { font-size: 18px; }
+    .ownership-block { grid-template-columns: 1fr 1fr; padding: 20px; gap: 20px; }
+    .own-pct { font-size: 32px; }
+    .hiring-grid { grid-template-columns: 1fr; gap: 10px; }
+    .hiring-block { padding: 16px; }
+
+    /* Footer */
+    footer { flex-direction: column; align-items: flex-start; padding: 20px 16px; gap: 12px; }
+    .footer-right { text-align: left; }
+
+    /* Login */
+    .login-box { padding: 32px 24px; margin: 0 16px; }
+    .login-title { font-size: 20px; }
+
+    /* Pre-money valuation bar */
+    [style*="background:var(--wine);color:white;padding:20px 28px"] { padding: 16px !important; flex-direction: column !important; }
+
+    /* Inline callout boxes */
+    [style*="padding:18px 24px"], [style*="padding:20px 28px"], [style*="padding:16px 24px"] { padding: 14px 16px !important; }
+
+    /* Executive summary */
+    .exec-summary { padding: 24px 20px; margin-top: 28px; }
+    .exec-summary-headline { font-size: 18px; }
+    .exec-kpis { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .exec-kpi-value { font-size: 20px; }
+
+    /* Architecture */
+    .arch-overview { grid-template-columns: 1fr; gap: 16px; }
+    .arch-card { padding: 20px; }
+    .arch-flow { padding: 20px; overflow-x: auto; }
+    .arch-flow-steps { grid-template-columns: repeat(5, 120px); min-width: 600px; }
+    .stack-grid { grid-template-columns: 1fr; gap: 12px; }
+    .stack-card { padding: 16px 20px; }
+    .arch-principles { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    /* Risks */
+    .risk-row { grid-template-columns: 1fr; }
+    .risk-cell-mit { border-left: none; border-top: 1px solid var(--grey-faint); }
+    .risk-header-row { display: none; }
   }
 
   /* ─── LOGIN ─── */
@@ -319,12 +495,28 @@
 
 <div class="tab-bar">
   <button class="tab-btn active" onclick="showTab('overview', this)">Overview & Documents</button>
+  <button class="tab-btn" onclick="showTab('product', this)">Product & Technology</button>
   <button class="tab-btn" onclick="showTab('mission', this)">Mission · Roadmap · Use of Funds</button>
   <button class="tab-btn" onclick="showTab('team', this)">Team & Ownership</button>
 </div>
 
 <div id="tab-overview" class="tab-panel active">
 <div class="page">
+
+  <div class="exec-summary">
+    <div class="exec-summary-label">Executive Summary</div>
+    <div class="exec-summary-headline">Narratio builds trust infrastructure for organizations that must prove how their information was built — and defend it when challenged.</div>
+    <div class="exec-summary-body">
+      <p>Narratio is a SaaS + API platform that converts enterprise data and content into traceable, explainable, and auditable evidence. The platform integrates as a horizontal layer within existing stacks — no migrations, no tooling replacement. It delivers a structured TrustScore, an explainable Evidence Graph, and audit-ready metadata.</p>
+      <p>The company is incorporated in Spain (S.L.), 100% founder-owned, with €905K ARR across 4 production-deployed enterprise accounts (Gestamp, Repsol, VARS Polska, ACES) and an active pipeline of 7+ qualified accounts including AENA, Naturgy, AstraZeneca, and UNICEF. Pre-money valuation: €3.5M. Raising €300K–€500K to accelerate commercial execution and engineering capacity.</p>
+    </div>
+    <div class="exec-kpis">
+      <div class="exec-kpi"><div class="exec-kpi-value">€905K</div><div class="exec-kpi-label">ARR 2026</div></div>
+      <div class="exec-kpi"><div class="exec-kpi-value">€226K</div><div class="exec-kpi-label">Avg. ACV</div></div>
+      <div class="exec-kpi"><div class="exec-kpi-value">7+</div><div class="exec-kpi-label">Pipeline Accounts</div></div>
+      <div class="exec-kpi"><div class="exec-kpi-value">€3.5M</div><div class="exec-kpi-label">Pre-Money</div></div>
+    </div>
+  </div>
 
   <div class="intro-block">
     <div>
@@ -515,16 +707,16 @@
     <div class="doc-category-label">01 — Strategy &amp; Business</div>
     <div class="doc-row"><div class="doc-number">1.1</div><div class="doc-info"><div class="doc-name">Business Plan 2026–2031</div><div class="doc-desc">Full company overview: product, market analysis, competitive landscape, business model, financial plan, team, and ownership structure.</div></div><div class="doc-type">PDF · 28 pp.</div><div><a href="https://drive.google.com/file/d/1h86CUkoKRNrcUxDJJOiM_1HzNZteLhFj/view?usp=drive_link" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
     <div class="doc-row"><div class="doc-number">1.2</div><div class="doc-info"><div class="doc-name">GTM, ICP &amp; Revenue Strategy</div><div class="doc-desc">Signal-driven go-to-market thesis, ICP definition, buyer prioritisation, pipeline discipline, and revenue scaling logic.</div></div><div class="doc-type">PDF · 12 pp.</div><div><a href="https://drive.google.com/file/d/1m14h8lw27Oi5tHwdhqBTsfKbCjTVaBw5/view?usp=drive_link" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
-    <div class="doc-row"><div class="doc-number">1.3</div><div class="doc-info"><div class="doc-name">Competitive Landscape</div><div class="doc-desc">Category-by-category analysis across data governance, AI TRiSM, content provenance, and manual verification. Positioning matrix.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('competitive')">↓ Download</button></div></div>
+    <div class="doc-row"><div class="doc-number">1.3</div><div class="doc-info"><div class="doc-name">Competitive Landscape</div><div class="doc-desc">Category-by-category analysis across data governance, AI TRiSM, content provenance, and manual verification. Positioning matrix.</div></div><div class="doc-type">XLSX</div><div><a href="https://docs.google.com/spreadsheets/d/1h5BOhC_EKK9OP5XjEmE4jVsTafGEi1wa/edit?usp=drive_link&ouid=108561787476715777365&rtpof=true&sd=true" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
     <div class="doc-category-label">02 — Financial</div>
-    <div class="doc-row"><div class="doc-number">2.1</div><div class="doc-info"><div class="doc-name">Financial Projections &amp; Use of Funds (2026–2030)</div><div class="doc-desc">Revenue model, cost structure, EBITDA trajectory, ARR growth, and detailed use-of-funds breakdown. Base / upside scenarios.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('financial')">↓ Download</button></div></div>
-    <div class="doc-row"><div class="doc-number">2.2</div><div class="doc-info"><div class="doc-name">Management Accounts — Internal Close (Jan–Feb 2026)</div><div class="doc-desc">Provisional management accounts 26/01/2026–18/02/2026. Internal close figures. Provisional and unaudited.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('mgmt')">↓ Download</button></div></div>
+    <div class="doc-row"><div class="doc-number">2.1</div><div class="doc-info"><div class="doc-name">Financial Projections &amp; Use of Funds (2026–2030)</div><div class="doc-desc">Revenue model, cost structure, EBITDA trajectory, ARR growth, and detailed use-of-funds breakdown. Base / upside scenarios.</div></div><div class="doc-type">XLSX</div><div><a href="https://docs.google.com/spreadsheets/d/1xjW6eWkOsksjwghQNzAr21BFvgH_2iZq/edit?usp=drive_link&ouid=108561787476715777365&rtpof=true&sd=true" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
+    <div class="doc-row"><div class="doc-number">2.2</div><div class="doc-info"><div class="doc-name">Management Accounts — Internal Close (Jan–Feb 2026)</div><div class="doc-desc">Provisional management accounts 26/01/2026–18/02/2026. Internal close figures. Provisional and unaudited.</div></div><div class="doc-type">XLSX</div><div><a href="https://docs.google.com/spreadsheets/d/1CKmSE7hNUIiihDTgsPPa7CU5hqs1Dvrc/edit?usp=drive_link&ouid=108561787476715777365&rtpof=true&sd=true" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
     <div class="doc-category-label">03 — Commercial &amp; Product</div>
-    <div class="doc-row"><div class="doc-number">3.1</div><div class="doc-info"><div class="doc-name">GTM ICP Master — Active Pipeline</div><div class="doc-desc">Live pipeline tracker: opportunity status, ICP qualification, stage progression. Daily-use operational document.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('pipeline')">↓ Download</button></div></div>
-    <div class="doc-row"><div class="doc-number">3.2</div><div class="doc-info"><div class="doc-name">Insights &amp; Metrics of Companies</div><div class="doc-desc">Client-level usage and value metrics: engagement patterns, workflow integration depth, scope expansion, and operational dependency by account.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('insights')">↓ Download</button></div></div>
+    <div class="doc-row"><div class="doc-number">3.1</div><div class="doc-info"><div class="doc-name">GTM ICP Master — Active Pipeline</div><div class="doc-desc">Live pipeline tracker: opportunity status, ICP qualification, stage progression. Daily-use operational document.</div></div><div class="doc-type">XLSX</div><div><a href="https://docs.google.com/spreadsheets/d/1tnbCqmuo1z_0MgkeoztWAGRY60OVH0Ub/edit?usp=drive_link&ouid=108561787476715777365&rtpof=true&sd=true" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
+    <div class="doc-row"><div class="doc-number">3.2</div><div class="doc-info"><div class="doc-name">Insights &amp; Metrics of Companies</div><div class="doc-desc">Client-level usage and value metrics: engagement patterns, workflow integration depth, scope expansion, and operational dependency by account.</div></div><div class="doc-type">XLSX</div><div><a href="https://docs.google.com/spreadsheets/d/1xgFiEH6syCsppSAdejyVKPcMd-Sidp-U/edit?usp=drive_link&ouid=108561787476715777365&rtpof=true&sd=true" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
     
     <div class="doc-category-label">04 — Corporate &amp; Legal</div>
-    <div class="doc-row"><div class="doc-number">4.1</div><div class="doc-info"><div class="doc-name">Cap Table &amp; Ownership Structure</div><div class="doc-desc">Current shareholding: 50% Paloma Rodiles Marín (CEO), 50% Antonio Muñoz Hellín (COO). No external investors, ESOPs, SAFEs, or convertibles.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('captable')">↓ Download</button></div></div>
+    <div class="doc-row"><div class="doc-number">4.1</div><div class="doc-info"><div class="doc-name">Cap Table &amp; Ownership Structure</div><div class="doc-desc">Current shareholding: 50% Paloma Rodiles Marín (CEO), 50% Antonio Muñoz Hellín (COO). No external investors, ESOPs, SAFEs, or convertibles.</div></div><div class="doc-type">XLSX</div><div><a href="https://docs.google.com/spreadsheets/d/16URbmaEFs02TSLk4UBWNHZxhWQ_PTgP3/edit?usp=drive_link&ouid=108561787476715777365&rtpof=true&sd=true" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
     <div class="doc-row"><div class="doc-number">4.2</div><div class="doc-info"><div class="doc-name">Certificate of Incorporation — CIF</div><div class="doc-desc">Official tax identification certificate. CIF: B-44795736. Issued by Agencia Tributaria.</div></div><div class="doc-type">PDF</div><div><a href="https://drive.google.com/file/d/1hpXZNodCxESk4uVxDV5GdmrlBh3NE_6r/view?usp=drive_link" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
     <div class="doc-row"><div class="doc-number">4.3</div><div class="doc-info"><div class="doc-name">Deed of Incorporation — Constitución S.L.</div><div class="doc-desc">Notarised deed of incorporation. Corporate purpose, founding shareholders, and initial share structure.</div></div><div class="doc-type">PDF</div><div><a href="https://drive.google.com/file/d/13H9wsGUDsWaIbjbAGYZP8dCcI9e-S11u/view?usp=drive_link" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
     <div class="doc-row"><div class="doc-number">4.4</div><div class="doc-info"><div class="doc-name">Live Demos & Product Architecture</div><div class="doc-desc">Instructions and context for reviewing TrustFilter™, VerifyFlow™, and SourceBadge™ in real environments.</div></div><div class="doc-type">PDF</div><div><a href="https://drive.google.com/file/d/19IYUWDrF0YwJgnDs3yAcIhLTWEsjygnY/view?usp=drive_link" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
@@ -539,6 +731,114 @@
       <p><strong>Confidentiality.</strong> This Data Room is strictly confidential. By accessing it, the recipient agrees not to reproduce, distribute, or disclose any part of its contents without the prior written consent of Narratio AI Solutions S.L.</p>
       <p><strong>Provisional financials.</strong> Management accounts included are provisional, internally prepared, and unaudited. Provided for transparency purposes only.</p>
     </div>
+  </div>
+
+</div>
+</div><div id="tab-product" class="tab-panel">
+<div class="page">
+
+  <div class="section-title">Platform Architecture</div>
+  <div class="arch-overview">
+    <div class="arch-card">
+      <div class="arch-card-label">Design Philosophy</div>
+      <div class="arch-card-title">Horizontal trust layer — not a vertical tool</div>
+      <div class="arch-card-body">
+        <p>Narratio is designed as infrastructure, not as an application. It integrates into existing enterprise stacks via API without requiring migrations, tooling replacement, or changes to existing workflows.</p>
+        <p>The platform ingests heterogeneous data, normalises it, seals provenance, executes verification flows, and produces structured evidence — all through a single, composable pipeline that works the same way regardless of sector or use case.</p>
+      </div>
+    </div>
+    <div class="arch-card">
+      <div class="arch-card-label">Deployment Model</div>
+      <div class="arch-card-title">On-premise GPU infrastructure + API-first delivery</div>
+      <div class="arch-card-body">
+        <p>Narratio runs on dedicated GPU infrastructure (NVIDIA L40s cluster) hosted on-premise. This is a deliberate architectural decision: enterprise clients in regulated sectors require data sovereignty, predictable latency, and independence from third-party cloud AI providers.</p>
+        <p>The platform is delivered as a managed API. Clients integrate via REST endpoints — no SDKs, no proprietary agents, no lock-in. Integration depth scales with usage, not with engineering effort.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="arch-flow">
+    <div class="arch-flow-title">Data Flow — From Ingestion to Evidence</div>
+    <div class="arch-flow-steps">
+      <div class="arch-flow-step">
+        <div class="arch-step-icon">1</div>
+        <div class="arch-step-name">Ingest</div>
+        <div class="arch-step-desc">Heterogeneous data sources — APIs, files, streams, databases</div>
+      </div>
+      <div class="arch-flow-step">
+        <div class="arch-step-icon">2</div>
+        <div class="arch-step-name">Normalise</div>
+        <div class="arch-step-desc">Deduplication, schema mapping, provenance sealing</div>
+      </div>
+      <div class="arch-flow-step">
+        <div class="arch-step-icon">3</div>
+        <div class="arch-step-name">Verify</div>
+        <div class="arch-step-desc">AI-powered verification, source contrast, risk detection</div>
+      </div>
+      <div class="arch-flow-step">
+        <div class="arch-step-icon">4</div>
+        <div class="arch-step-name">Evidence</div>
+        <div class="arch-step-desc">TrustScore, Evidence Graph, audit metadata generation</div>
+      </div>
+      <div class="arch-flow-step">
+        <div class="arch-step-icon">5</div>
+        <div class="arch-step-name">Expose</div>
+        <div class="arch-step-desc">API response, SourceBadge, dashboard, compliance export</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Technology Stack</div>
+  <div class="stack-grid">
+    <div class="stack-card">
+      <div class="stack-card-label">AI &amp; Compute</div>
+      <div class="stack-item"><span class="stack-item-name">NVIDIA L40s</span><span class="stack-item-desc">GPU cluster · On-prem</span></div>
+      <div class="stack-item"><span class="stack-item-name">Custom ML Pipeline</span><span class="stack-item-desc">Verification &amp; scoring</span></div>
+      <div class="stack-item"><span class="stack-item-name">LLM Orchestration</span><span class="stack-item-desc">Evidence Graph generation</span></div>
+      <div class="stack-item"><span class="stack-item-name">Vector Storage</span><span class="stack-item-desc">Semantic indexing &amp; retrieval</span></div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-card-label">Backend &amp; Infrastructure</div>
+      <div class="stack-item"><span class="stack-item-name">Python / FastAPI</span><span class="stack-item-desc">Core API layer</span></div>
+      <div class="stack-item"><span class="stack-item-name">PostgreSQL</span><span class="stack-item-desc">Relational data &amp; audit logs</span></div>
+      <div class="stack-item"><span class="stack-item-name">Redis</span><span class="stack-item-desc">Caching &amp; queue management</span></div>
+      <div class="stack-item"><span class="stack-item-name">Docker / K8s</span><span class="stack-item-desc">Containerised orchestration</span></div>
+    </div>
+    <div class="stack-card">
+      <div class="stack-card-label">Security &amp; Ops</div>
+      <div class="stack-item"><span class="stack-item-name">TLS / mTLS</span><span class="stack-item-desc">End-to-end encryption</span></div>
+      <div class="stack-item"><span class="stack-item-name">RBAC + JWT</span><span class="stack-item-desc">Enterprise auth layer</span></div>
+      <div class="stack-item"><span class="stack-item-name">Prometheus / Grafana</span><span class="stack-item-desc">Observability &amp; alerting</span></div>
+      <div class="stack-item"><span class="stack-item-name">Offsite Backup</span><span class="stack-item-desc">Encrypted, geo-redundant</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">Architecture Principles</div>
+  <div class="arch-principles">
+    <div class="arch-principle">
+      <div class="arch-principle-icon">◇</div>
+      <div class="arch-principle-name">Data Sovereignty</div>
+      <div class="arch-principle-desc">No data leaves the infrastructure. GPU on-prem ensures full control for regulated clients.</div>
+    </div>
+    <div class="arch-principle">
+      <div class="arch-principle-icon">◈</div>
+      <div class="arch-principle-name">API-First</div>
+      <div class="arch-principle-desc">Every capability exposed via REST. No SDKs, no agents, no lock-in. Composable by design.</div>
+    </div>
+    <div class="arch-principle">
+      <div class="arch-principle-icon">▣</div>
+      <div class="arch-principle-name">Audit by Default</div>
+      <div class="arch-principle-desc">Every operation is logged, timestamped, and traceable. The platform audits itself as it audits data.</div>
+    </div>
+    <div class="arch-principle">
+      <div class="arch-principle-icon">◉</div>
+      <div class="arch-principle-name">Explainability</div>
+      <div class="arch-principle-desc">No black boxes. Every TrustScore is decomposable into its evidence components and source chain.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:24px;padding:18px 24px;background:var(--white);border:1px solid var(--grey-faint);border-left:3px solid var(--wine);font-size:13px;font-weight:300;color:var(--grey-dark);line-height:1.7;">
+    <strong>Why on-prem GPU?</strong> Enterprise clients in energy, industrial, and public sectors require data sovereignty guarantees that cloud-based AI providers cannot contractually offer. On-prem infrastructure also eliminates per-token cost exposure at scale — VARS Polska's 270,000 flows/month would be economically unviable on third-party LLM APIs. The infrastructure investment (€80K–€120K depending on scenario) replaces what would be €300K+/year in cloud AI costs at current volume.
   </div>
 
 </div>
@@ -565,6 +865,7 @@
   </div>
 
   <div class="section-title">Execution Roadmap</div>
+  <div class="table-scroll">
   <table class="roadmap-table">
     <thead>
       <tr><th>Phase</th><th>Period</th><th>Objective</th><th>KPI Target</th><th>Status</th></tr>
@@ -628,8 +929,10 @@
       </tr>
     </tbody>
   </table>
+  </div>
 
   <div class="section-title">SaaS Revenue Projections — Subscription Track</div>
+  <div class="table-scroll">
   <table class="proj-table">
     <thead>
       <tr><th>Scenario</th><th>2026</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th><th>5-Year Total</th></tr>
@@ -640,6 +943,7 @@
       <tr><td>Scenario H <span style="font-size:11px;color:var(--grey-mid);">(4→16 subscribers)</span></td><td>€71.760</td><td>€299.000</td><td>€609.960</td><td>€995.670</td><td class="proj-highlight">€1.626.560</td><td class="proj-highlight">€3.602.950</td></tr>
     </tbody>
   </table>
+  </div>
   <div style="margin-top:12px;font-size:12px;font-weight:300;color:var(--grey-mid);font-style:italic;">Subscription price: €2.990/month (IVA included). Projections are from Financial Projections & Use of Funds document. Excludes enterprise license revenue.</div>
 
   <div class="section-title">Use of Funds</div>
@@ -705,6 +1009,81 @@
   <div style="margin-top:20px;padding:20px 28px;background:var(--white);border:1px solid var(--grey-faint);border-left:3px solid var(--wine);font-size:13px;font-weight:300;color:var(--grey-dark);line-height:1.7;">
     Both scenarios target ARR ≥ €1.5M by H1 2027. Scenario 2 (€500K) accelerates the commercial team and doubles engineering capacity, targeting ARR ≥ €3M by H2 2027. Full financial model available for download in the Document Index tab.
   </div>
+
+  <div class="section-title">Key Risks &amp; Mitigations</div>
+  <div class="risk-grid">
+    <div class="risk-header-row">
+      <div class="risk-header-cell">Risk</div>
+      <div class="risk-header-cell">Mitigation</div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-cell">
+        <span class="risk-severity severity-high">High</span>
+        <div class="risk-name">Revenue Concentration</div>
+        <div class="risk-desc">VARS Polska represents 53% of total ARR (€480K). Loss of this account would significantly impact revenue and growth trajectory.</div>
+      </div>
+      <div class="risk-cell-mit">
+        <div class="mit-label">Mitigation</div>
+        <div class="mit-text">VARS contract is deeply embedded — 270,000 flows/month across 150 TB of telemetry creates high switching cost. Active pipeline of 7+ accounts targets diversification to &lt;30% concentration by Q4 2026. Land &amp; expand model with Gestamp and Repsol accelerates rebalancing.</div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-cell">
+        <span class="risk-severity severity-high">High</span>
+        <div class="risk-name">Founder Dependency</div>
+        <div class="risk-desc">The company operates entirely through two co-founders. No additional engineering, commercial, or operational staff. Key-person risk on both strategic and technical execution.</div>
+      </div>
+      <div class="risk-cell-mit">
+        <div class="mit-label">Mitigation</div>
+        <div class="mit-text">Primary use of funds includes hiring CTO (Fullstack), Backend Developer, and SDR. Scenario 2 (€500K) doubles engineering capacity. Planned hires are scoped to reduce founder bottleneck within 3–6 months of investment close. Product architecture is documented and modular by design.</div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-cell">
+        <span class="risk-severity severity-medium">Medium</span>
+        <div class="risk-name">Sales Cycle Length</div>
+        <div class="risk-desc">Enterprise procurement in regulated sectors (energy, aviation, public administration) involves long decision cycles — typically 4–9 months from first contact to signed contract.</div>
+      </div>
+      <div class="risk-cell-mit">
+        <div class="mit-label">Mitigation</div>
+        <div class="mit-text">Signal-driven GTM model qualifies accounts before outreach — reducing wasted cycles. SaaS subscription track (€2.990/mo) provides a faster-closing revenue stream for mid-market. Pipeline includes accounts at multiple stages to ensure continuous deal flow.</div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-cell">
+        <span class="risk-severity severity-medium">Medium</span>
+        <div class="risk-name">Category Definition Risk</div>
+        <div class="risk-desc">Trust infrastructure is not yet a recognised enterprise software category. Buyers may struggle to allocate budget or find internal sponsors for a product that doesn't fit existing purchasing categories.</div>
+      </div>
+      <div class="risk-cell-mit">
+        <div class="mit-label">Mitigation</div>
+        <div class="mit-text">EU AI Act, Digital Services Act, and ESG reporting mandates are creating regulatory tailwinds that force budget allocation. Existing clients validate the category through production usage. Narratio positions against existing budget lines (compliance, data governance, reporting) rather than creating new ones.</div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-cell">
+        <span class="risk-severity severity-medium">Medium</span>
+        <div class="risk-name">Competitive Emergence</div>
+        <div class="risk-desc">Established players in data governance (Collibra, Informatica) or AI TRiSM could extend into trust verification. Content provenance standards (C2PA) may commoditise parts of the stack.</div>
+      </div>
+      <div class="risk-cell-mit">
+        <div class="mit-label">Mitigation</div>
+        <div class="mit-text">Narratio operates at the intersection of data governance, content provenance, and AI explainability — none of the existing players cover the full stack. Competitive landscape analysis (available in Document Index) maps positioning across all adjacent categories. Production deployments create defensible moats through integration depth and operational dependency.</div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-cell">
+        <span class="risk-severity severity-low">Low</span>
+        <div class="risk-name">Technical Infrastructure Risk</div>
+        <div class="risk-desc">On-prem GPU infrastructure requires maintenance, redundancy planning, and capital investment. Hardware failure could disrupt service delivery.</div>
+      </div>
+      <div class="risk-cell-mit">
+        <div class="mit-label">Mitigation</div>
+        <div class="mit-text">Use of funds includes redundancy (spares, offsite backup, UPS). Infrastructure is containerised (Docker/K8s), enabling rapid recovery. On-prem model eliminates dependency on cloud provider pricing changes and ensures data sovereignty compliance — a contractual requirement for current enterprise clients.</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:14px;font-size:11.5px;font-weight:300;color:var(--grey-mid);font-style:italic;line-height:1.6;">Risk assessment reflects management's current view as of March 2026. Severity ratings are directional, not actuarial. Provided for transparency and investor evaluation purposes.</div>
 
 </div>
 </div><div id="tab-team" class="tab-panel">
