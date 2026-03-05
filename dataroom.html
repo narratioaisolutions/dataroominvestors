@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Narratio — Investor Data Room</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjOEIxQTFBIi8+PHRleHQgeD0iMTYiIHk9IjIzIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk48L3RleHQ+PC9zdmc+">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wine: #8B1A1A;
+    --wine-light: #a82222;
+    --wine-pale: #f5eeee;
+    --black: #1a1714;
+    --grey-dark: #3d3a38;
+    --grey-mid: #7a7672;
+    --grey-light: #c8c4bf;
+    --grey-faint: #f0ede9;
+    --cream: #faf8f5;
+    --white: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cream); color: var(--black); font-family: "DM Sans", sans-serif; font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+  /* DISCLAIMER */
+  .disclaimer-banner { background: var(--wine); color: rgba(255,255,255,0.85); font-size: 11.5px; font-weight: 300; letter-spacing: 0.02em; line-height: 1.6; padding: 10px 48px; text-align: center; }
+
+  /* HEADER */
+  header { background: var(--white); border-bottom: 1px solid var(--grey-faint); padding: 36px 64px 32px; display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; }
+  .header-left { flex: 1; }
+  .logo-mark { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .logo-n { width: 38px; height: 38px; background: var(--wine); color: white; font-family: "Playfair Display", serif; font-size: 22px; display: flex; align-items: center; justify-content: center; }
+  .logo-wordmark { font-size: 18px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+  .logo-sub { font-size: 11px; font-weight: 300; letter-spacing: 0.05em; color: var(--grey-mid); text-transform: uppercase; margin-left: 50px; margin-top: -4px; }
+  .header-title { font-family: "Playfair Display", serif; font-size: 28px; font-weight: 400; line-height: 1.25; }
+  .header-title span { color: var(--wine); }
+  .header-right { text-align: right; padding-top: 48px; min-width: 200px; }
+  .header-meta { font-size: 11.5px; font-weight: 300; color: var(--grey-mid); letter-spacing: 0.04em; line-height: 1.9; text-transform: uppercase; }
+  .header-meta strong { font-weight: 500; color: var(--grey-dark); }
+
+  /* CONFIDENTIAL */
+  .confidential-strip { background: var(--wine-pale); border-left: 3px solid var(--wine); padding: 12px 64px; display: flex; align-items: center; gap: 12px; }
+  .conf-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wine); }
+  .conf-text { font-size: 12px; font-weight: 300; color: var(--grey-dark); }
+
+  /* TABS */
+  .tab-bar { background: var(--white); border-bottom: 2px solid var(--grey-faint); padding: 0 64px; display: flex; gap: 0; position: sticky; top: 0; z-index: 100; }
+  .tab-btn { font-family: "DM Sans", sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey-mid); background: none; border: none; border-bottom: 2px solid transparent; padding: 16px 24px; cursor: pointer; margin-bottom: -2px; transition: all 0.2s; white-space: nowrap; }
+  .tab-btn:hover { color: var(--grey-dark); }
+  .tab-btn.active { color: var(--wine); border-bottom-color: var(--wine); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* PAGE */
+  .page { max-width: 1080px; margin: 0 auto; padding: 0 64px 80px; }
+  .section-title { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--wine); margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid var(--grey-light); margin-top: 52px; }
+
+  /* INTRO */
+  .intro-block { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--grey-faint); }
+  .intro-headline { font-family: "Playfair Display", serif; font-size: 21px; font-weight: 400; line-height: 1.45; margin-bottom: 18px; }
+  .intro-body { font-size: 14.5px; font-weight: 300; color: var(--grey-dark); line-height: 1.75; }
+  .intro-body p + p { margin-top: 12px; }
+  .intro-stats { display: flex; flex-direction: column; border-left: 1px solid var(--grey-faint); padding-left: 48px; }
+  .stat-row { padding: 14px 0; border-bottom: 1px solid var(--grey-faint); display: flex; flex-direction: column; gap: 2px; }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { font-size: 10.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-mid); }
+  .stat-value { font-family: "Playfair Display", serif; font-size: 20px; color: var(--black); font-weight: 400; }
+  .stat-note { font-size: 12px; font-weight: 300; color: var(--grey-mid); }
+
+  /* MODULES */
+  .modules-row { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+  .module-pill { border: 1px solid var(--grey-light); padding: 14px 20px; flex: 1; min-width: 180px; }
+  .module-pill-name { font-size: 12.5px; font-weight: 500; color: var(--wine); margin-bottom: 4px; }
+  .module-pill-desc { font-size: 12px; font-weight: 300; color: var(--grey-dark); line-height: 1.5; }
+
+  /* BUSINESS MODEL */
+  .biz-model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 0; }
+  .biz-card { border: 1px solid var(--grey-faint); background: var(--white); padding: 24px 28px; }
+  .biz-card-tag { font-size: 9.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--wine); margin-bottom: 8px; }
+  .biz-card-title { font-family: "Playfair Display", serif; font-size: 19px; font-weight: 400; color: var(--black); margin-bottom: 12px; }
+  .biz-card-price { font-size: 28px; font-weight: 500; color: var(--wine); font-family: "Playfair Display", serif; margin-bottom: 4px; }
+  .biz-card-price-sub { font-size: 12px; font-weight: 300; color: var(--grey-mid); margin-bottom: 16px; }
+  .biz-card-body { font-size: 13px; font-weight: 300; color: var(--grey-dark); line-height: 1.7; }
+  .biz-card-body p + p { margin-top: 8px; }
+  .biz-note { background: var(--grey-faint); padding: 12px 16px; font-size: 12px; font-weight: 300; color: var(--grey-dark); line-height: 1.6; margin-top: 12px; border-left: 2px solid var(--wine); }
+
+  /* PIPELINE */
+  .pipeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pipeline-card { border: 1px solid var(--grey-faint); background: var(--white); padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .pipeline-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .pipeline-org { font-size: 14.5px; font-weight: 500; color: var(--black); }
+  .pipeline-stage { font-size: 9.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; white-space: nowrap; flex-shrink: 0; }
+  .stage-active { background: #e8f0fb; color: #2a55a0; }
+  .stage-authority { background: #fdf3e7; color: #a0622a; }
+  .stage-pov { background: #edf7f0; color: #2a6b3a; }
+  .pipeline-sector { font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--grey-mid); }
+  .pipeline-use-case { font-size: 12.5px; font-weight: 300; color: var(--grey-dark); line-height: 1.5; padding-top: 4px; border-top: 1px solid var(--grey-faint); }
+  .pipeline-legend { display: flex; gap: 20px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--grey-faint); flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 300; color: var(--grey-mid); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 1px; flex-shrink: 0; }
+
+  /* ARR */
+  .arr-breakdown { background: var(--white); border: 1px solid var(--grey-faint); border-top: 3px solid var(--wine); padding: 24px 28px; }
+  .arr-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+  .arr-total-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wine); }
+  .arr-total-value { font-family: "Playfair Display", serif; font-size: 26px; color: var(--black); }
+  .arr-total-sub { font-size: 13px; color: var(--grey-mid); font-weight: 300; margin-left: 8px; }
+  .arr-source { font-size: 11px; font-weight: 300; color: var(--grey-mid); font-style: italic; }
+  .arr-table { width: 100%; border-collapse: collapse; }
+  .arr-table thead tr { border-bottom: 1px solid var(--grey-light); }
+  .arr-table th { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-mid); padding: 0 0 8px; text-align: left; }
+  .arr-table th:not(:first-child) { text-align: right; }
+  .arr-table td { padding: 11px 0; border-bottom: 1px solid var(--grey-faint); font-size: 13.5px; vertical-align: middle; }
+  .arr-table td:not(:first-child) { text-align: right; }
+  .arr-table tr:last-child td { border-bottom: none; }
+  .arr-client-name { font-weight: 500; color: var(--black); }
+  .arr-sector-tag { font-size: 10.5px; font-weight: 300; color: var(--grey-mid); display: block; margin-top: 1px; }
+  .arr-mrr { font-weight: 400; color: var(--grey-dark); }
+  .arr-value { font-weight: 500; color: var(--black); }
+  .arr-bar-cell { width: 120px; }
+  .arr-bar-track { height: 4px; background: var(--grey-faint); border-radius: 2px; overflow: hidden; margin-left: auto; width: 100%; }
+  .arr-bar-fill { height: 100%; background: var(--wine); border-radius: 2px; }
+  .arr-total-row td { padding-top: 14px; border-top: 1px solid var(--grey-light) !important; border-bottom: none !important; font-weight: 600; color: var(--black); }
+  .arr-disclaimer-note { margin-top: 14px; font-size: 11.5px; font-weight: 300; color: var(--grey-mid); font-style: italic; line-height: 1.6; }
+
+  /* DOC INDEX */
+  .doc-category-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--grey-mid); padding: 14px 0 6px; }
+  .doc-row { display: grid; grid-template-columns: 32px 1fr 80px 110px; align-items: start; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--grey-faint); transition: background 0.15s; }
+  .doc-row:hover { background: var(--grey-faint); margin: 0 -16px; padding: 16px 16px; border-radius: 2px; }
+  .doc-number { font-size: 12px; font-weight: 500; color: var(--grey-light); padding-top: 2px; }
+  .doc-name { font-size: 14.5px; font-weight: 500; color: var(--black); margin-bottom: 3px; }
+  .doc-desc { font-size: 12.5px; font-weight: 300; color: var(--grey-mid); line-height: 1.5; }
+  .doc-type { font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey-mid); padding-top: 3px; }
+  .dl-btn { background: var(--wine); color: white; border: none; padding: 5px 12px; font-family: "DM Sans", sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; cursor: pointer; border-radius: 2px; white-space: nowrap; transition: background 0.15s; }
+  .dl-btn:hover { background: var(--wine-light); }
+
+  /* LEGAL */
+  .legal-block { margin-top: 52px; padding: 28px 32px; background: var(--white); border: 1px solid var(--grey-faint); border-top: 3px solid var(--wine); }
+  .legal-title { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wine); margin-bottom: 14px; }
+  .legal-text { font-size: 12.5px; font-weight: 300; color: var(--grey-dark); line-height: 1.7; }
+  .legal-text p + p { margin-top: 10px; }
+
+  /* ── TAB 2: MISSION / ROADMAP / USE OF FUNDS ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 0; }
+  .mvv-card { padding: 28px 32px; border: 1px solid var(--grey-faint); background: var(--white); }
+  .mvv-label { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--wine); margin-bottom: 12px; }
+  .mvv-text { font-family: "Playfair Display", serif; font-size: 17px; line-height: 1.6; color: var(--black); font-weight: 400; }
+  .mvv-sub { font-size: 13px; font-weight: 300; color: var(--grey-dark); line-height: 1.7; margin-top: 10px; }
+
+  .roadmap-table { width: 100%; border-collapse: collapse; }
+  .roadmap-table th { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-mid); padding: 0 12px 10px 0; text-align: left; border-bottom: 1px solid var(--grey-light); }
+  .roadmap-table td { padding: 13px 12px 13px 0; border-bottom: 1px solid var(--grey-faint); font-size: 13px; vertical-align: top; }
+  .roadmap-table tr:last-child td { border-bottom: none; }
+  .phase-name { font-weight: 500; color: var(--black); display: block; margin-bottom: 2px; }
+  .phase-period { font-size: 11px; font-weight: 300; color: var(--grey-mid); }
+  .phase-kpi { font-weight: 500; color: var(--wine); }
+  .phase-desc { font-size: 12.5px; font-weight: 300; color: var(--grey-dark); }
+  .status-badge { display: inline-block; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 7px; border-radius: 2px; }
+  .status-done { background: #e6f4ec; color: #1e7a3e; font-weight: 500; }
+  .status-inprogress { background: #e8f0fb; color: #2a55a0; }
+  .status-planned { background: var(--grey-faint); color: var(--grey-mid); }
+  .status-future { background: #f3f0f7; color: #6b5a8a; }
+
+  .funds-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 0; }
+  .funds-card { border: 1px solid var(--grey-faint); background: var(--white); padding: 24px 28px; }
+  .funds-scenario { font-size: 9.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--wine); margin-bottom: 6px; }
+  .funds-total { font-family: "Playfair Display", serif; font-size: 28px; color: var(--black); margin-bottom: 16px; }
+  .funds-line { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--grey-faint); font-size: 13px; }
+  .funds-line:last-child { border-bottom: none; }
+  .funds-line-name { font-weight: 400; color: var(--grey-dark); }
+  .funds-line-amount { font-weight: 500; color: var(--black); }
+  .funds-line.sub { padding-left: 16px; }
+  .funds-line.sub .funds-line-name { font-size: 12px; font-weight: 300; color: var(--grey-mid); }
+  .funds-line.sub .funds-line-amount { font-size: 12px; color: var(--grey-dark); }
+  .funds-line.total { border-top: 1px solid var(--grey-light); border-bottom: none; padding-top: 10px; }
+  .funds-line.total .funds-line-name { font-weight: 600; }
+  .funds-line.total .funds-line-amount { font-weight: 600; color: var(--wine); }
+
+  .proj-table { width: 100%; border-collapse: collapse; margin-top: 0; }
+  .proj-table th { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey-mid); padding: 0 0 10px; text-align: right; border-bottom: 1px solid var(--grey-light); }
+  .proj-table th:first-child { text-align: left; }
+  .proj-table td { padding: 10px 0; border-bottom: 1px solid var(--grey-faint); font-size: 13px; text-align: right; }
+  .proj-table td:first-child { text-align: left; font-weight: 400; color: var(--grey-dark); }
+  .proj-table tr:last-child td { border-bottom: none; }
+  .proj-highlight { font-weight: 500; color: var(--black); }
+
+  /* ── TAB 3: TEAM ── */
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 0; }
+  .team-card { background: var(--white); border: 1px solid var(--grey-faint); padding: 32px; }
+  .team-card-header { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px; }
+  .team-avatar { width: 56px; height: 56px; background: var(--wine); color: white; font-family: "Playfair Display", serif; font-size: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .team-name { font-family: "Playfair Display", serif; font-size: 20px; font-weight: 400; color: var(--black); }
+  .team-role { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--wine); margin-top: 3px; }
+  .team-equity { font-size: 12px; font-weight: 300; color: var(--grey-mid); margin-top: 2px; }
+  .team-divider { border: none; border-top: 1px solid var(--grey-faint); margin: 0 0 16px; }
+  .team-bio { font-size: 13.5px; font-weight: 300; color: var(--grey-dark); line-height: 1.75; }
+  .team-bio p + p { margin-top: 10px; }
+  .team-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .team-tag { font-size: 10.5px; font-weight: 400; color: var(--grey-dark); background: var(--grey-faint); padding: 4px 10px; border-radius: 2px; letter-spacing: 0.03em; }
+  .ownership-block { background: var(--white); border: 1px solid var(--grey-faint); border-top: 3px solid var(--wine); padding: 28px 32px; margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .own-item { display: flex; flex-direction: column; gap: 4px; }
+  .own-pct { font-family: "Playfair Display", serif; font-size: 40px; color: var(--wine); }
+  .own-name { font-size: 14px; font-weight: 500; color: var(--black); }
+  .own-role { font-size: 12px; font-weight: 300; color: var(--grey-mid); }
+  .hiring-block { margin-top: 24px; padding: 24px 32px; background: var(--grey-faint); border: 1px solid var(--grey-faint); }
+  .hiring-title { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 14px; }
+  .hiring-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .hiring-role { background: var(--white); border: 1px solid var(--grey-faint); padding: 14px 16px; }
+  .hiring-role-name { font-size: 13px; font-weight: 500; color: var(--black); margin-bottom: 3px; }
+  .hiring-role-note { font-size: 11.5px; font-weight: 300; color: var(--grey-mid); }
+
+  /* FOOTER */
+  footer { background: var(--black); color: rgba(255,255,255,0.5); padding: 28px 64px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 0; }
+  .footer-left { display: flex; align-items: center; gap: 16px; }
+  .footer-n { width: 28px; height: 28px; background: var(--wine); color: white; font-family: "Playfair Display", serif; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+  .footer-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.8); letter-spacing: 0.06em; text-transform: uppercase; }
+  .footer-right { font-size: 12px; font-weight: 300; text-align: right; line-height: 1.7; }
+
+  @media (max-width: 768px) {
+    header, .page, footer, .confidential-strip, .tab-bar { padding-left: 20px; padding-right: 20px; }
+    .intro-block, .biz-model-grid, .two-col, .funds-grid, .team-grid, .hiring-grid { grid-template-columns: 1fr; }
+    .intro-stats { border-left: none; padding-left: 0; border-top: 1px solid var(--grey-faint); padding-top: 24px; }
+    .doc-row { grid-template-columns: 24px 1fr 80px; }
+    .doc-type { display: none; }
+    .ownership-block { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ─── LOGIN ─── */
+  #login-screen {
+    position: fixed; inset: 0; background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999; flex-direction: column; gap: 0;
+  }
+  .login-box {
+    background: var(--white); border: 1px solid var(--grey-faint);
+    border-top: 3px solid var(--wine); padding: 48px 52px;
+    width: 100%; max-width: 420px;
+  }
+  .login-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 36px; }
+  .login-n { width: 36px; height: 36px; background: var(--wine); color: white; font-family: "Playfair Display", serif; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+  .login-wordmark { font-size: 16px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); }
+  .login-title { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 400; color: var(--black); margin-bottom: 6px; }
+  .login-sub { font-size: 13px; font-weight: 300; color: var(--grey-mid); margin-bottom: 32px; line-height: 1.6; }
+  .login-label { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey-mid); display: block; margin-bottom: 8px; }
+  .login-input {
+    width: 100%; padding: 12px 16px; border: 1px solid var(--grey-light);
+    background: var(--cream); font-family: "DM Sans", sans-serif;
+    font-size: 14px; font-weight: 300; color: var(--black); outline: none;
+    transition: border-color 0.2s; letter-spacing: 0.08em;
+  }
+  .login-input:focus { border-color: var(--wine); background: var(--white); }
+  .login-btn {
+    width: 100%; margin-top: 20px; background: var(--wine); color: white;
+    border: none; padding: 13px; font-family: "DM Sans", sans-serif;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer; transition: background 0.15s;
+  }
+  .login-btn:hover { background: var(--wine-light); }
+  .login-error {
+    margin-top: 12px; font-size: 12px; font-weight: 400;
+    color: var(--wine); display: none; text-align: center;
+  }
+  .login-footer { margin-top: 28px; font-size: 11px; font-weight: 300; color: var(--grey-light); text-align: center; line-height: 1.6; }
+  #main-content { display: none; }
+
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-n">N</div>
+      <div class="login-wordmark">Narratio</div>
+    </div>
+    <div class="login-title">Investor Data Room</div>
+    <div class="login-sub">Confidential. Access restricted to authorised recipients only.</div>
+    <label class="login-label" for="pwd-input">Access Password</label>
+    <input class="login-input" id="pwd-input" type="password" placeholder="Enter password" onkeydown="if(event.key==='Enter') checkLogin()">
+    <button class="login-btn" onclick="checkLogin()">Access Data Room</button>
+    <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
+    <div class="login-footer">Narratio AI Solutions S.L. · CIF B-44795736<br>Strictly confidential · Do not distribute</div>
+  </div>
+</div>
+<div id="main-content">
+
+<div class="disclaimer-banner">
+  The information shared may not constitute investment advice. In particular, it should not be tailored or personalised in view of the identity of the potential investors and/or their personal circumstances.
+</div>
+
+<header>
+  <div class="header-left">
+    <div class="logo-mark">
+      <div class="logo-n">N</div>
+      <div>
+        <div class="logo-wordmark">Narratio</div>
+      </div>
+    </div>
+    <div class="logo-sub">AI Solutions S.L.</div>
+    <div style="margin-top: 28px;">
+      <div class="header-title">Investor<br><span>Data Room</span></div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-meta">
+      <div><strong>Version</strong> &nbsp;1.0</div>
+      <div><strong>Date</strong> &nbsp;March 2026</div>
+      <div><strong>Status</strong> &nbsp;Confidential</div>
+      <div style="margin-top: 10px;"><strong>CIF</strong> &nbsp;B-44795736</div>
+      <div><strong>Jurisdiction</strong> &nbsp;Spain</div>
+    </div>
+  </div>
+</header>
+
+<div class="confidential-strip">
+  <span class="conf-label">Confidential</span>
+  <span class="conf-text">This document and its contents are strictly confidential and intended solely for the named recipient. — Unauthorised reproduction or distribution is prohibited.</span>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('overview', this)">Overview & Documents</button>
+  <button class="tab-btn" onclick="showTab('mission', this)">Mission · Roadmap · Use of Funds</button>
+  <button class="tab-btn" onclick="showTab('team', this)">Team & Ownership</button>
+</div>
+
+<div id="tab-overview" class="tab-panel active">
+<div class="page">
+
+  <div class="intro-block">
+    <div>
+      <div class="intro-headline">Trust infrastructure for organizations that must prove how their information was built.</div>
+      <div class="intro-body">
+        <p>Narratio is a SaaS + API-first platform that converts data and content into traceable, explainable, and auditable evidence. It integrates as a horizontal layer within existing enterprise stacks — without migrations, without tooling replacement.</p>
+        <p>The platform does not operate in true/false. It delivers a structured TrustScore, an explainable Evidence Graph, and audit-ready metadata — enabling organizations to demonstrate informational provenance when challenged by regulators, auditors, or the public.</p>
+        <p>Narratio is enterprise-first, production-deployed, and operating in high-stakes environments across industrial, energy, and corporate sectors.</p>
+      </div>
+      <div class="modules-row">
+        <div class="module-pill"><div class="module-pill-name">TrustFilter™</div><div class="module-pill-desc">Ingestion, normalisation, deduplication, provenance sealing</div></div>
+        <div class="module-pill"><div class="module-pill-name">VerifyFlow™</div><div class="module-pill-desc">Explainable verification via API — TrustScore + Evidence Graph</div></div>
+        <div class="module-pill"><div class="module-pill-name">SourceBadge™</div><div class="module-pill-desc">Embeddable traceability layer for controlled public exposure</div></div>
+      </div>
+    </div>
+    <div class="intro-stats">
+      <div class="stat-row">
+        <div class="stat-label">ARR 2026</div>
+        <div class="stat-value">€905K <span style="font-size:14px;color:var(--grey-mid);font-family:'DM Sans',sans-serif;font-weight:300;">~€1M</span></div>
+        <div class="stat-note">MRR €75.417 · 4 enterprise accounts in production · Source: Insights & Metrics</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Avg. ACV</div>
+        <div class="stat-value">€226K</div>
+        <div class="stat-note">Core enterprise avg. €287K · Range €45K–€480K · Volume-driven pricing</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Stage</div>
+        <div class="stat-value">Pre-Scale</div>
+        <div class="stat-note">Product in production, commercial repeatability phase</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Model</div>
+        <div class="stat-value">SaaS + API</div>
+        <div class="stat-note">Subscription €2.990/mo · Enterprise license + volume · Land & Expand</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Active Clients</div>
+        <div class="stat-value">Enterprise</div>
+        <div class="stat-note">Gestamp, Repsol, VARS — production-level deployments</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Active Pipeline</div>
+        <div class="stat-value">7+ Accounts</div>
+        <div class="stat-note">AENA, ENAIRE, Naturgy, AstraZeneca, UNICEF, Gob. Canarias, Generalitat</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Ownership</div>
+        <div class="stat-value">100% Founders</div>
+        <div class="stat-note">No external investors, no convertibles, clean cap table</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Incorporated</div>
+        <div class="stat-value">Spain · S.L.</div>
+        <div class="stat-note">CIF B-44795736</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Business Model</div>
+  <div class="biz-model-grid">
+    <div class="biz-card">
+      <div class="biz-card-tag">Track 1 — Mid-Market & Growth</div>
+      <div class="biz-card-title">SaaS Subscription</div>
+      <div class="biz-card-price">€2.990 <span style="font-size:16px;font-weight:300;font-family:'DM Sans',sans-serif;">/month</span></div>
+      <div class="biz-card-price-sub">€35.880/year · IVA not included</div>
+      <div class="biz-card-body">
+        <p>Flat monthly subscription designed for mid-market organizations that need verifiable traceability without complex enterprise procurement. Access to the full Narratio platform — TrustFilter™, VerifyFlow™, and SourceBadge™ — within defined usage tiers.</p>
+        <p>Self-onboarding with integration support. Ideal for organizations with structured workflows and defined data pipelines that need to move fast.</p>
+      </div>
+      <div class="biz-note">Scalable revenue track: from 2 subscribers in 2026 to 16+ in 2030 (Scenario M). Projected SaaS ARR 2030: €1.6M–€3.6M across scenarios L–H.</div>
+    </div>
+    <div class="biz-card">
+      <div class="biz-card-tag">Track 2 — Enterprise</div>
+      <div class="biz-card-title">License + Volume Usage</div>
+      <div class="biz-card-price">€45K–€480K <span style="font-size:16px;font-weight:300;font-family:'DM Sans',sans-serif;">ARR</span></div>
+      <div class="biz-card-price-sub">Variable per account · Based on data volume + workflow complexity</div>
+      <div class="biz-card-body">
+        <p>Enterprise contracts are not flat licenses. Pricing is structured around <strong>data volume processed, verification flows executed, and integration depth</strong> — not a fixed per-seat fee. This is why enterprise ARR varies significantly per account.</p>
+        <p>VARS (€480K ARR) processes 270,000 flows/month across petabytes of ITS telemetry. Gestamp (€230K ARR) runs 1,800 monthly reporting cycles. Repsol (€150K ARR) covers 600–900 verifications/month for regulatory reporting. Each contract reflects the operational footprint of the deployment.</p>
+      </div>
+      <div class="biz-note">Land & Expand: initial entry targets one critical workflow. Expansion is driven by usage, additional datasets, and module adoption — not by upselling.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Active Pipeline</div>
+  <div class="pipeline-grid">
+    <div class="pipeline-card">
+      <div class="pipeline-card-top"><div class="pipeline-org">AENA</div><span class="pipeline-stage stage-active">Active Pipeline</span></div>
+      <div class="pipeline-sector">Infrastructure · Aviation</div>
+      <div class="pipeline-use-case">Traceability and auditability of operational information flows across high-stakes, public-facing infrastructure environments. Regulatory and reputational exposure.</div>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-card-top"><div class="pipeline-org">ENAIRE</div><span class="pipeline-stage stage-active">Active Pipeline</span></div>
+      <div class="pipeline-sector">Infrastructure · Air Navigation</div>
+      <div class="pipeline-use-case">Verification and chain-of-custody of critical operational data in regulated airspace management environments. High audit and compliance exposure.</div>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-card-top"><div class="pipeline-org">Naturgy</div><span class="pipeline-stage stage-active">Active Pipeline</span></div>
+      <div class="pipeline-sector">Energy · Utilities</div>
+      <div class="pipeline-use-case">Defensible ESG and operational reporting. Traceability of data used for regulatory disclosures, sustainability claims, and investor communications.</div>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-card-top"><div class="pipeline-org">AstraZeneca</div><span class="pipeline-stage stage-authority">Authority Activation</span></div>
+      <div class="pipeline-sector">Life Sciences · Pharma</div>
+      <div class="pipeline-use-case">Evidence-grade traceability for clinical, regulatory, and communications workflows. Explainable sourcing of claims used in public and institutional outputs.</div>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-card-top"><div class="pipeline-org">UNICEF</div><span class="pipeline-stage stage-authority">Authority Activation</span></div>
+      <div class="pipeline-sector">International Organisation · NGO</div>
+      <div class="pipeline-use-case">Source verification and provenance for high-exposure public communications, reports, and advocacy content. Institutional accountability requirements.</div>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-card-top"><div class="pipeline-org">Gobierno de Canarias</div><span class="pipeline-stage stage-active">Active Pipeline</span></div>
+      <div class="pipeline-sector">Public Administration · Regional Gov.</div>
+      <div class="pipeline-use-case">Auditability and traceability of public information flows for institutional communication, transparency obligations, and DSA-aligned compliance.</div>
+    </div>
+    <div class="pipeline-card">
+      <div class="pipeline-card-top"><div class="pipeline-org">Generalitat</div><span class="pipeline-stage stage-active">Active Pipeline</span></div>
+      <div class="pipeline-sector">Public Administration · Regional Gov.</div>
+      <div class="pipeline-use-case">Evidence-based governance infrastructure. Verifiable sourcing of information used in public-facing decision-making, reporting, and communication workflows.</div>
+    </div>
+  </div>
+  <div class="pipeline-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#2a55a0;"></div>Active Pipeline — commercial process open, ICP-qualified, buyer identified</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a0622a;"></div>Authority Activation — signal confirmed, outreach initiated, not yet active sales</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2a6b3a;"></div>Proof of Value — scoped, paid PoV in progress</div>
+  </div>
+
+  <div class="section-title">Current ARR — Active Clients</div>
+  <div class="arr-breakdown">
+    <div class="arr-header">
+      <div>
+        <div class="arr-total-label">Total ARR 2026</div>
+        <div style="margin-top:4px;"><span class="arr-total-value">€905.000</span><span class="arr-total-sub">~€1M &nbsp;·&nbsp; MRR €75.417</span></div>
+      </div>
+      <div class="arr-source">Source: Insights &amp; Metrics of Companies · Internal · Feb 2026</div>
+    </div>
+    <table class="arr-table">
+      <thead><tr><th>Client</th><th>MRR</th><th>ARR 2026</th><th>% of Total</th><th class="arr-bar-cell" style="text-align:right;">Distribution</th></tr></thead>
+      <tbody>
+        <tr><td><span class="arr-client-name">VARS Polska</span><span class="arr-sector-tag">Infrastructure · Smart Mobility · 🇵🇱 Poland</span></td><td class="arr-mrr">€40.000</td><td class="arr-value">€480.000</td><td>53%</td><td class="arr-bar-cell"><div class="arr-bar-track"><div class="arr-bar-fill" style="width:53%;"></div></div></td></tr>
+        <tr><td><span class="arr-client-name">Gestamp Automoción</span><span class="arr-sector-tag">Automotive · Industrial · 🇪🇸 Spain</span></td><td class="arr-mrr">€19.167</td><td class="arr-value">€230.000</td><td>25%</td><td class="arr-bar-cell"><div class="arr-bar-track"><div class="arr-bar-fill" style="width:25%;"></div></div></td></tr>
+        <tr><td><span class="arr-client-name">Repsol</span><span class="arr-sector-tag">Energy · Oil &amp; Gas Transition · 🇪🇸 Spain</span></td><td class="arr-mrr">€12.500</td><td class="arr-value">€150.000</td><td>17%</td><td class="arr-bar-cell"><div class="arr-bar-track"><div class="arr-bar-fill" style="width:17%;"></div></div></td></tr>
+        <tr><td><span class="arr-client-name">ACES</span><span class="arr-sector-tag">Education · Institutional · 🇦🇷 Argentina</span></td><td class="arr-mrr">€3.750</td><td class="arr-value">€45.000</td><td>5%</td><td class="arr-bar-cell"><div class="arr-bar-track"><div class="arr-bar-fill" style="width:5%;"></div></div></td></tr>
+        <tr class="arr-total-row"><td>Total · 4 enterprise accounts</td><td>€75.417 / mo</td><td>€905.000</td><td>100%</td><td class="arr-bar-cell"></td></tr>
+      </tbody>
+    </table>
+    <div class="arr-disclaimer-note">Figures extracted from Insights &amp; Metrics of Companies (internal document, Feb 2026). All accounts are production-level enterprise deployments under active license. Unaudited management data, provided for investor transparency.</div>
+  </div>
+
+  <div class="section-title">Contract Value — ACV Analysis</div>
+  <div class="acv-grid">
+    <div class="acv-metric">
+      <div class="acv-metric-label">Average ACV</div>
+      <div class="acv-metric-value">€226.250</div>
+      <div class="acv-metric-note">4 enterprise accounts · 2026</div>
+    </div>
+    <div class="acv-metric">
+      <div class="acv-metric-label">Median ACV</div>
+      <div class="acv-metric-value">€190.000</div>
+      <div class="acv-metric-note">Between Repsol (€150K) and Gestamp (€230K)</div>
+    </div>
+    <div class="acv-metric">
+      <div class="acv-metric-label">Core Enterprise Avg.</div>
+      <div class="acv-metric-value">€286.667</div>
+      <div class="acv-metric-note">Excl. ACES — industrial & energy accounts only</div>
+    </div>
+    <div class="acv-metric">
+      <div class="acv-metric-label">ACV Range</div>
+      <div class="acv-metric-value">€45K – €480K</div>
+      <div class="acv-metric-note">Variance reflects data volume, not pricing tier</div>
+    </div>
+  </div>
+  <div style="margin-top:16px;padding:18px 24px;background:var(--white);border:1px solid var(--grey-faint);border-left:3px solid var(--wine);font-size:13px;font-weight:300;color:var(--grey-dark);line-height:1.7;">
+    <strong>ACV is volume-driven, not seat-based.</strong> Enterprise contracts are priced on data volume processed, verification flows executed, and integration depth. VARS Polska (€480K ACV) processes 270,000 flows/month across 150 TB of ITS telemetry. Gestamp (€230K ACV) runs 1,800 monthly reporting cycles. The ACV range reflects operational footprint — not pricing variability. As clients expand usage, ACV expands automatically without renegotiation.
+  </div>
+
+  <div class="section-title">Investor Deck</div>
+  <div class="deck-block">
+    <div class="deck-title">Narratio — Investor Presentation</div>
+    <div class="deck-desc">Visual pitch deck covering company overview, product architecture, market thesis, traction, competitive positioning, and investment case.</div>
+    <a href="https://www.figma.com/deck/6Sto4x5jBAtaZ9wQ7OsdU1" target="_blank" rel="noopener"><button class="deck-btn">↗ Open Investor Deck</button></a>
+  </div>
+
+  <div class="section-title">Document Index</div>
+  <div>
+    <div class="doc-category-label">01 — Strategy &amp; Business</div>
+    <div class="doc-row"><div class="doc-number">1.1</div><div class="doc-info"><div class="doc-name">Business Plan 2026–2031</div><div class="doc-desc">Full company overview: product, market analysis, competitive landscape, business model, financial plan, team, and ownership structure.</div></div><div class="doc-type">PDF · 28 pp.</div><div><a href="https://drive.google.com/file/d/1h86CUkoKRNrcUxDJJOiM_1HzNZteLhFj/view?usp=drive_link" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
+    <div class="doc-row"><div class="doc-number">1.2</div><div class="doc-info"><div class="doc-name">GTM, ICP &amp; Revenue Strategy</div><div class="doc-desc">Signal-driven go-to-market thesis, ICP definition, buyer prioritisation, pipeline discipline, and revenue scaling logic.</div></div><div class="doc-type">PDF · 12 pp.</div><div><a href="https://drive.google.com/file/d/1m14h8lw27Oi5tHwdhqBTsfKbCjTVaBw5/view?usp=drive_link" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
+    <div class="doc-row"><div class="doc-number">1.3</div><div class="doc-info"><div class="doc-name">Competitive Landscape</div><div class="doc-desc">Category-by-category analysis across data governance, AI TRiSM, content provenance, and manual verification. Positioning matrix.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('competitive')">↓ Download</button></div></div>
+    <div class="doc-category-label">02 — Financial</div>
+    <div class="doc-row"><div class="doc-number">2.1</div><div class="doc-info"><div class="doc-name">Financial Projections &amp; Use of Funds (2026–2030)</div><div class="doc-desc">Revenue model, cost structure, EBITDA trajectory, ARR growth, and detailed use-of-funds breakdown. Base / upside scenarios.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('financial')">↓ Download</button></div></div>
+    <div class="doc-row"><div class="doc-number">2.2</div><div class="doc-info"><div class="doc-name">Management Accounts — Internal Close (Jan–Feb 2026)</div><div class="doc-desc">Provisional management accounts 26/01/2026–18/02/2026. Internal close figures. Provisional and unaudited.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('mgmt')">↓ Download</button></div></div>
+    <div class="doc-category-label">03 — Commercial &amp; Product</div>
+    <div class="doc-row"><div class="doc-number">3.1</div><div class="doc-info"><div class="doc-name">GTM ICP Master — Active Pipeline</div><div class="doc-desc">Live pipeline tracker: opportunity status, ICP qualification, stage progression. Daily-use operational document.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('pipeline')">↓ Download</button></div></div>
+    <div class="doc-row"><div class="doc-number">3.2</div><div class="doc-info"><div class="doc-name">Insights &amp; Metrics of Companies</div><div class="doc-desc">Client-level usage and value metrics: engagement patterns, workflow integration depth, scope expansion, and operational dependency by account.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('insights')">↓ Download</button></div></div>
+    
+    <div class="doc-category-label">04 — Corporate &amp; Legal</div>
+    <div class="doc-row"><div class="doc-number">4.1</div><div class="doc-info"><div class="doc-name">Cap Table &amp; Ownership Structure</div><div class="doc-desc">Current shareholding: 50% Paloma Rodiles Marín (CEO), 50% Antonio Muñoz Hellín (COO). No external investors, ESOPs, SAFEs, or convertibles.</div></div><div class="doc-type">XLSX</div><div><button class="dl-btn" onclick="downloadFile('captable')">↓ Download</button></div></div>
+    <div class="doc-row"><div class="doc-number">4.2</div><div class="doc-info"><div class="doc-name">Certificate of Incorporation — CIF</div><div class="doc-desc">Official tax identification certificate. CIF: B-44795736. Issued by Agencia Tributaria.</div></div><div class="doc-type">PDF</div><div><a href="https://drive.google.com/file/d/1hpXZNodCxESk4uVxDV5GdmrlBh3NE_6r/view?usp=drive_link" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
+    <div class="doc-row"><div class="doc-number">4.3</div><div class="doc-info"><div class="doc-name">Deed of Incorporation — Constitución S.L.</div><div class="doc-desc">Notarised deed of incorporation. Corporate purpose, founding shareholders, and initial share structure.</div></div><div class="doc-type">PDF</div><div><a href="https://drive.google.com/file/d/13H9wsGUDsWaIbjbAGYZP8dCcI9e-S11u/view?usp=drive_link" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
+    <div class="doc-row"><div class="doc-number">4.4</div><div class="doc-info"><div class="doc-name">Live Demos & Product Architecture</div><div class="doc-desc">Instructions and context for reviewing TrustFilter™, VerifyFlow™, and SourceBadge™ in real environments.</div></div><div class="doc-type">PDF</div><div><a href="https://drive.google.com/file/d/19IYUWDrF0YwJgnDs3yAcIhLTWEsjygnY/view?usp=drive_link" target="_blank" rel="noopener"><button class="dl-btn">↗ Open</button></a></div></div>
+    <div class="doc-row"><div class="doc-number">4.5</div><div class="doc-info"><div class="doc-name">Investor Deck — Figma Presentation</div><div class="doc-desc">Visual pitch deck covering company overview, product, market, traction, and investment thesis. Hosted on Figma — opens directly in browser.</div></div><div class="doc-type">Figma Deck</div><div><a href="https://www.figma.com/deck/6Sto4x5jBAtaZ9wQ7OsdU1" target="_blank" rel="noopener"><button class="dl-btn" style="background:var(--grey-dark);">↗ Open Deck</button></a></div></div>
+  </div>
+
+  <div class="legal-block">
+    <div class="legal-title">Important Notices</div>
+    <div class="legal-text">
+      <p><strong>No investment advice.</strong> The information contained in this Data Room has been prepared by Narratio AI Solutions S.L. for informational purposes only. It does not constitute, and should not be construed as, investment advice, a solicitation, an offer or a recommendation to buy or sell any security or financial instrument in any jurisdiction. The information shared may not constitute investment advice. In particular, it should not be tailored or personalised in view of the identity of the potential investors and/or their personal circumstances.</p>
+      <p><strong>Forward-looking statements.</strong> Certain information contained herein may constitute forward-looking statements, projections, or estimates. These reflect the company's current expectations as of the date of preparation and involve known and unknown risks. Actual results may differ materially from those projected.</p>
+      <p><strong>Confidentiality.</strong> This Data Room is strictly confidential. By accessing it, the recipient agrees not to reproduce, distribute, or disclose any part of its contents without the prior written consent of Narratio AI Solutions S.L.</p>
+      <p><strong>Provisional financials.</strong> Management accounts included are provisional, internally prepared, and unaudited. Provided for transparency purposes only.</p>
+    </div>
+  </div>
+
+</div>
+</div><div id="tab-mission" class="tab-panel">
+<div class="page">
+
+  <div class="section-title">Mission &amp; Vision</div>
+  <div class="two-col">
+    <div class="mvv-card">
+      <div class="mvv-label">Mission</div>
+      <div class="mvv-text">To make information defensible — by turning data into structured, traceable, and explainable evidence that organizations can stand behind.</div>
+      <div class="mvv-sub">Narratio exists because the inability to explain how information was built is becoming a systemic liability. Regulatory pressure, public scrutiny, and reputational risk have created a structural gap between how organizations produce information and how they must defend it. We close that gap.</div>
+    </div>
+    <div class="mvv-card">
+      <div class="mvv-label">Vision</div>
+      <div class="mvv-text">To become the standard trust infrastructure layer for enterprise information — the same way AWS became the standard for compute and Okta for identity.</div>
+      <div class="mvv-sub">Narratio is not a vertical tool. It is a horizontal layer that integrates into any stack, any workflow, any sector. Every organization that produces, uses, or publishes information it must defend is a potential user. The category does not yet have an infrastructure owner — we intend to be it.</div>
+    </div>
+  </div>
+  <div style="margin-top: 20px;" class="mvv-card">
+    <div class="mvv-label">Strategic Thesis</div>
+    <div class="mvv-text" style="font-size:15px;">"The cost of not being able to explain information is becoming higher than the cost of the platform."</div>
+    <div class="mvv-sub" style="margin-top:12px;">Narratio competes when this threshold is crossed. EU AI Act, Digital Services Act, ESG reporting obligations, and the mainstreaming of C2PA content provenance standards are systematically raising this threshold across every sector we target. We do not sell productivity. We sell defensibility — and the market for it is expanding by regulatory mandate.</div>
+  </div>
+
+  <div class="section-title">Execution Roadmap</div>
+  <table class="roadmap-table">
+    <thead>
+      <tr><th>Phase</th><th>Period</th><th>Objective</th><th>KPI Target</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="phase-name">Fundacional</span><span class="phase-period">Q1 2026</span></td>
+        <td style="color:var(--grey-mid);font-size:12px;">Q1 2026</td>
+        <td class="phase-desc">4 enterprise accounts in production. Repeatable contract structure validated across industrial, energy, and education sectors. Platform deployed at scale.</td>
+        <td class="phase-kpi">ARR = €905K ✓</td>
+        <td><span class="status-badge status-done">Achieved</span></td>
+      </tr>
+      <tr>
+        <td><span class="phase-name">Validación Comercial</span><span class="phase-period">Q2 2026</span></td>
+        <td style="color:var(--grey-mid);font-size:12px;">Q2 2026</td>
+        <td class="phase-desc">Close sales without redesigning the product. Prove repeatable commercial motion. Reduce per-deal customisation. First SaaS subscribers onboarded.</td>
+        <td class="phase-kpi">ARR ≥ €1.1M</td>
+        <td><span class="status-badge status-inprogress">In Progress</span></td>
+      </tr>
+      <tr>
+        <td><span class="phase-name">Consolidación</span><span class="phase-period">Q3 2026</span></td>
+        <td style="color:var(--grey-mid);font-size:12px;">Q3 2026</td>
+        <td class="phase-desc">Anchor accounts and expansion. Expand existing contracts via land &amp; expand. Deepen workflow integration. 6–7 enterprise accounts active.</td>
+        <td class="phase-kpi">ARR ≥ €1.4M</td>
+        <td><span class="status-badge status-planned">Planned</span></td>
+      </tr>
+      <tr>
+        <td><span class="phase-name">Pre-Scale</span><span class="phase-period">Q4 2026</span></td>
+        <td style="color:var(--grey-mid);font-size:12px;">Q4 2026</td>
+        <td class="phase-desc">Stable ARR + scale narrative. Finance and GTM preparation for 2027 growth. ARR structure that supports investment round. 8–10 active accounts.</td>
+        <td class="phase-kpi">ARR ≥ €1.7–2M</td>
+        <td><span class="status-badge status-planned">Planned</span></td>
+      </tr>
+      <tr>
+        <td><span class="phase-name">Scale</span><span class="phase-period">H1 2027</span></td>
+        <td style="color:var(--grey-mid);font-size:12px;">H1 2027</td>
+        <td class="phase-desc">Multiply ARR without multiplying headcount. New sales + expansion. Build commercial infrastructure (SDR, account management).</td>
+        <td class="phase-kpi">ARR ≥ €3–3.5M</td>
+        <td><span class="status-badge status-future">Planned</span></td>
+      </tr>
+      <tr>
+        <td><span class="phase-name">Expansión</span><span class="phase-period">H2 2027</span></td>
+        <td style="color:var(--grey-mid);font-size:12px;">H2 2027</td>
+        <td class="phase-desc">New growth vectors: new sectors and geographies. GTM + partnerships. Maintain focus while expanding coverage.</td>
+        <td class="phase-kpi">ARR ≥ €5–6M</td>
+        <td><span class="status-badge status-future">Future</span></td>
+      </tr>
+      <tr>
+        <td><span class="phase-name">Platform Consolidation</span><span class="phase-period">H1 2028</span></td>
+        <td style="color:var(--grey-mid);font-size:12px;">H1 2028</td>
+        <td class="phase-desc">Position Narratio as standard trust layer — critical infrastructure, not a point tool. Account expansion + standardisation at scale.</td>
+        <td class="phase-kpi">ARR ≥ €8–10M</td>
+        <td><span class="status-badge status-future">Future</span></td>
+      </tr>
+      <tr>
+        <td><span class="phase-name">Operational Leverage</span><span class="phase-period">H2 2028</span></td>
+        <td style="color:var(--grey-mid);font-size:12px;">H2 2028</td>
+        <td class="phase-desc">ARR grows faster than cost structure. Improve pricing, commercial efficiency, and margin expansion as the platform matures.</td>
+        <td class="phase-kpi">Gross Margin ≥ 75–80%</td>
+        <td><span class="status-badge status-future">Future</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">SaaS Revenue Projections — Subscription Track</div>
+  <table class="proj-table">
+    <thead>
+      <tr><th>Scenario</th><th>2026</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th><th>5-Year Total</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Scenario L <span style="font-size:11px;color:var(--grey-mid);">(2→7 subscribers)</span></td><td>€38.870</td><td>€140.530</td><td>€257.140</td><td>€472.420</td><td class="proj-highlight">€690.690</td><td class="proj-highlight">€1.599.650</td></tr>
+      <tr><td>Scenario M <span style="font-size:11px;color:var(--grey-mid);">(3→11 subscribers)</span></td><td>€53.820</td><td>€221.260</td><td>€445.510</td><td>€756.470</td><td class="proj-highlight">€1.133.210</td><td class="proj-highlight">€2.610.270</td></tr>
+      <tr><td>Scenario H <span style="font-size:11px;color:var(--grey-mid);">(4→16 subscribers)</span></td><td>€71.760</td><td>€299.000</td><td>€609.960</td><td>€995.670</td><td class="proj-highlight">€1.626.560</td><td class="proj-highlight">€3.602.950</td></tr>
+    </tbody>
+  </table>
+  <div style="margin-top:12px;font-size:12px;font-weight:300;color:var(--grey-mid);font-style:italic;">Subscription price: €2.990/month (IVA included). Projections are from Financial Projections & Use of Funds document. Excludes enterprise license revenue.</div>
+
+  <div class="section-title">Use of Funds</div>
+
+  <div style="background:var(--wine);color:white;padding:20px 28px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+    <div>
+      <div style="font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;opacity:0.7;margin-bottom:4px;">Pre-Money Valuation</div>
+      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:400;">€3.500.000</div>
+    </div>
+    <div style="font-size:13px;font-weight:300;opacity:0.85;max-width:440px;line-height:1.6;">Based on €905K ARR (×3.8 revenue multiple), production-deployed product, enterprise client base, and active pipeline of 7+ qualified accounts.</div>
+  </div>
+
+  <div class="funds-grid">
+
+    <div class="funds-card">
+      <div class="funds-scenario">Scenario 1</div>
+      <div class="funds-total">€300.000</div>
+      <div style="font-size:11px;font-weight:300;color:var(--grey-mid);margin-bottom:16px;margin-top:-10px;">8.6% equity · €3.5M pre-money</div>
+      <div class="funds-line"><span class="funds-line-name">Producto e Ingeniería</span><span class="funds-line-amount">€140.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Nodo IA (GPU + L40s ampliado)</span><span class="funds-line-amount">€80.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Control Plane, Storage, Backup offsite</span><span class="funds-line-amount">€28.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Network, Security, UPS, Rack, CI/CD, Observability</span><span class="funds-line-amount">€22.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Spares &amp; Setup</span><span class="funds-line-amount">€10.000</span></div>
+      <div class="funds-line"><span class="funds-line-name">I+D</span><span class="funds-line-amount">€10.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Evidence Graph V2, Auth Enterprise, Connectors MVP, UX</span><span class="funds-line-amount">€10.000</span></div>
+      <div class="funds-line"><span class="funds-line-name">Personal</span><span class="funds-line-amount">€90.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">CTO (Fullstack)</span><span class="funds-line-amount">€35.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Backend Developer</span><span class="funds-line-amount">€30.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">SDR / Sales (freelance)</span><span class="funds-line-amount">€25.000</span></div>
+      <div class="funds-line"><span class="funds-line-name">GTM</span><span class="funds-line-amount">€50.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Events + campaigns + retargeting</span><span class="funds-line-amount">€30.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Paid media + content &amp; PR</span><span class="funds-line-amount">€20.000</span></div>
+      <div class="funds-line"><span class="funds-line-name">Security &amp; Contingencias</span><span class="funds-line-amount">€10.000</span></div>
+      <div class="funds-line total"><span class="funds-line-name">Total Investment</span><span class="funds-line-amount">€300.000</span></div>
+    </div>
+
+    <div class="funds-card">
+      <div class="funds-scenario">Scenario 2</div>
+      <div class="funds-total">€500.000</div>
+      <div style="font-size:11px;font-weight:300;color:var(--grey-mid);margin-bottom:16px;margin-top:-10px;">12.5% equity · €3.5M pre-money</div>
+      <div class="funds-line"><span class="funds-line-name">Producto e Ingeniería</span><span class="funds-line-amount">€210.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Nodo IA (GPU cluster — 8x L40s)</span><span class="funds-line-amount">€120.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Control Plane, Storage, Backup offsite</span><span class="funds-line-amount">€40.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Network, Security, UPS, Rack, CI/CD, Observability</span><span class="funds-line-amount">€35.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Spares &amp; Redundancy</span><span class="funds-line-amount">€15.000</span></div>
+      <div class="funds-line"><span class="funds-line-name">I+D</span><span class="funds-line-amount">€20.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Evidence Graph V2, API marketplace, Auth Enterprise, Connectors advanced, UX</span><span class="funds-line-amount">€20.000</span></div>
+      <div class="funds-line"><span class="funds-line-name">Personal</span><span class="funds-line-amount">€170.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">CTO (Fullstack)</span><span class="funds-line-amount">€40.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Backend Developer × 2</span><span class="funds-line-amount">€60.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Account Executive / Sales</span><span class="funds-line-amount">€40.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">SDR / Marketing Ops</span><span class="funds-line-amount">€30.000</span></div>
+      <div class="funds-line"><span class="funds-line-name">GTM</span><span class="funds-line-amount">€85.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Events + campaigns + retargeting</span><span class="funds-line-amount">€45.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Content, PR &amp; paid media</span><span class="funds-line-amount">€25.000</span></div>
+      <div class="funds-line sub"><span class="funds-line-name">Marketing ad ops (freelance)</span><span class="funds-line-amount">€15.000</span></div>
+      <div class="funds-line"><span class="funds-line-name">Security &amp; Contingencias</span><span class="funds-line-amount">€15.000</span></div>
+      <div class="funds-line total"><span class="funds-line-name">Total Investment</span><span class="funds-line-amount">€500.000</span></div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:20px;padding:20px 28px;background:var(--white);border:1px solid var(--grey-faint);border-left:3px solid var(--wine);font-size:13px;font-weight:300;color:var(--grey-dark);line-height:1.7;">
+    Both scenarios target ARR ≥ €1.5M by H1 2027. Scenario 2 (€500K) accelerates the commercial team and doubles engineering capacity, targeting ARR ≥ €3M by H2 2027. Full financial model available for download in the Document Index tab.
+  </div>
+
+</div>
+</div><div id="tab-team" class="tab-panel">
+<div class="page">
+
+  <div class="section-title">Founding Team</div>
+  <div class="team-grid">
+
+    <div class="team-card">
+      <div class="team-card-header">
+        <div class="team-avatar">P</div>
+        <div>
+          <div class="team-name">Paloma Rodiles Marín</div>
+          <div class="team-role">Co-founder &amp; CEO</div>
+          <div class="team-equity">50% equity · Spain</div>
+        </div>
+      </div>
+      <hr class="team-divider">
+      <div class="team-bio">
+        <p>Leads strategy, commercial development, and company narrative. Responsible for the go-to-market thesis, ICP definition, investor relations, and institutional positioning. Drives enterprise sales and the signal-driven activation model that governs Narratio's pipeline.</p>
+        <p>Background in communication, institutional environments, and complex information contexts. Deep expertise in how organizations manage, defend, and communicate information under scrutiny — the exact operational problem Narratio is built to solve.</p>
+        <p>Architectured the product positioning and brand identity of Narratio from inception, and built the initial enterprise client base including Gestamp, Repsol, and VARS Polska.</p>
+      </div>
+      <div class="team-tags">
+        <span class="team-tag">Strategy</span>
+        <span class="team-tag">Enterprise GTM</span>
+        <span class="team-tag">Investor Relations</span>
+        <span class="team-tag">Brand &amp; Narrative</span>
+        <span class="team-tag">Institutional</span>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-card-header">
+        <div class="team-avatar">A</div>
+        <div>
+          <div class="team-name">Antonio Muñoz Hellín</div>
+          <div class="team-role">Co-founder &amp; COO</div>
+          <div class="team-equity">50% equity · Spain</div>
+        </div>
+      </div>
+      <hr class="team-divider">
+      <div class="team-bio">
+        <p>Leads operations, product architecture, technical delivery, and client integration. Responsible for ensuring that Narratio's platform is delivered at production grade in enterprise environments — with the security, reliability, and auditability that complex clients require.</p>
+        <p>Manages the operational infrastructure of the company: client onboarding, deployment pipelines, system observability, and the internal processes that make commercial repeatability possible.</p>
+        <p>Brings a systems-thinking approach to the challenge of building trust infrastructure — ensuring that the product's promise of traceability and auditability is structurally embedded in how Narratio itself operates.</p>
+      </div>
+      <div class="team-tags">
+        <span class="team-tag">Operations</span>
+        <span class="team-tag">Product Architecture</span>
+        <span class="team-tag">Technical Delivery</span>
+        <span class="team-tag">Client Integration</span>
+        <span class="team-tag">Infrastructure</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Ownership Structure</div>
+  <div class="ownership-block">
+    <div class="own-item">
+      <div class="own-pct">50%</div>
+      <div class="own-name">Paloma Rodiles Marín</div>
+      <div class="own-role">Co-founder &amp; CEO</div>
+    </div>
+    <div class="own-item">
+      <div class="own-pct">50%</div>
+      <div class="own-name">Antonio Muñoz Hellín</div>
+      <div class="own-role">Co-founder &amp; COO</div>
+    </div>
+  </div>
+  <div style="margin-top:16px;padding:16px 24px;background:var(--grey-faint);font-size:13px;font-weight:300;color:var(--grey-dark);line-height:1.7;">
+    Founders hold 100% of share capital. No external investors, no ESOPs, no SAFEs, no convertibles, no third-party participations in place. Balanced 50/50 structure ensures strong founder alignment, clear governance, and decision-making agility — while leaving full flexibility to incorporate external capital in the next growth phase.
+  </div>
+
+  <div class="section-title">Planned Hires — Investment-Contingent</div>
+  <div class="hiring-block">
+    <div class="hiring-title">Roles to be activated upon investment (Scenario 1: €300K — partial · Scenario 2: €500K — full team)</div>
+    <div class="hiring-grid">
+      <div class="hiring-role">
+        <div class="hiring-role-name">CTO — Fullstack</div>
+        <div class="hiring-role-note">Core engineering lead. Platform robustness, API architecture, and integration depth.</div>
+      </div>
+      <div class="hiring-role">
+        <div class="hiring-role-name">Backend Developer</div>
+        <div class="hiring-role-note">Supports CTO on pipeline development, connector build-out, and Evidence Graph V2.</div>
+      </div>
+      <div class="hiring-role">
+        <div class="hiring-role-name">SDR / Marketing Ops</div>
+        <div class="hiring-role-note">Freelance. Signal monitoring, outreach cadences, and GTM event support.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div><footer>
+  <div class="footer-left">
+    <div class="footer-n">N</div>
+    <div>
+      <div class="footer-name">Narratio AI Solutions S.L.</div>
+      <div style="font-size:11px;margin-top:2px;">CIF B-44795736 · Registered in Spain</div>
+    </div>
+  </div>
+  <div class="footer-right">
+    <div>Data Room v2.0 · March 2026</div>
+    <div>Strictly Confidential · Do Not Distribute</div>
+    <div style="margin-top:6px;color:rgba(255,255,255,0.3);font-size:11px;">© 2026 Narratio AI Solutions S.L. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+
+<script>
+const FILES = {
+  /* ---> IMPORTANTE: PEGA AQUÍ TU CÓDIGO BASE64 ORIGINAL DE LIVEDEMO <--- */
+  /* Copia la línea que empieza por "livedemo: { uri: ..." de tu archivo original y reemplaza este texto */
+  
+};
+
+function downloadFile(key) {
+  const f = FILES[key];
+  if (!f) {
+    alert("Document is not available for download or has been linked externally.");
+    return;
+  }
+  const a = document.createElement('a');
+  a.href = f.uri;
+  a.download = f.name;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+</script>
+</div><script>
+function checkLogin() {
+  const pwd = document.getElementById('pwd-input').value;
+  const err = document.getElementById('login-error');
+  if (pwd === 'investinnarratio') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    sessionStorage.setItem('narratio_auth', '1');
+  } else {
+    err.style.display = 'block';
+  }
+}
+if(sessionStorage.getItem('narratio_auth') === '1') {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+}
+</script>
+</body>
+</html>
